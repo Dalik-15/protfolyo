@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="tr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.D.A.Y | Geleneksel Fırın Lezzetleri</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Kahraman Bölümü Arka Planı */
+        .hero-gradient {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 80%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(243, 156, 18, 0.15) 0%, transparent 70%);
+            transform: rotate(-15deg);
+        }
+        .orange-accent { color: #f39c12; }
+        .bg-orange-accent { background-color: #f39c12; }
+        
+        /* Görsel Çerçeve Efekti */
+        .image-frame::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 3px solid #f39c12;
+            border-radius: 1rem;
+            z-index: -1;
+        }
+
+        /* Mobil Menü Animasyonları */
+        #mobile-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        .sidebar-open {
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-300">
+
+    <!-- Mobil Yan Menü (Sidebar) -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden backdrop-blur-sm"></div>
+    <div id="mobile-sidebar" class="fixed inset-y-0 left-0 w-72 bg-white dark:bg-slate-900 z-[70] shadow-2xl sidebar-closed md:hidden">
+        <div class="p-6 flex flex-col h-full">
+            <div class="flex items-center justify-between mb-10">
+                <span class="text-2xl font-bold tracking-tighter text-gray-900 dark:text-white uppercase">A.D.<span class="orange-accent">A.Y</span></span>
+                <button id="close-sidebar" class="p-2 text-gray-500 hover:text-orange-500 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <nav class="flex flex-col space-y-4 text-lg font-medium">
+                <a href="#" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Anasayfa</a>
+                <a href="#urunler" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Ürünlerimiz</a>
+                <a href="#hakkimizda" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Hikayemiz</a>
+                <a href="#iletisim" class="mobile-nav-link p-3 rounded-xl bg-orange-accent text-white hover:bg-orange-600 transition text-center shadow-lg shadow-orange-500/20">İletişim</a>
+            </nav>
+
+            <div class="mt-auto pt-10 border-t border-gray-100 dark:border-slate-800">
+                <p class="text-sm text-gray-400">© 2026 A.D.A.Y Fırıncılık</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigasyon -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm dark:bg-slate-900/90 dark:shadow-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <!-- Mobil Menü Açma Butonu (Hamburger) -->
+                    <button id="open-sidebar" class="md:hidden mr-4 p-2 text-gray-600 dark:text-white hover:text-orange-500 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-3xl font-bold tracking-tighter text-gray-900 dark:text-white uppercase">A.D.<span class="orange-accent">A.Y</span></span>
+                    </div>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-baseline space-x-8 text-sm font-medium uppercase tracking-wider">
+                        <a href="#" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Anasayfa</a>
+                        <a href="#urunler" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Ürünlerimiz</a>
+                        <a href="#hakkimizda" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Hikayemiz</a>
+                    </div>
+                    
+                    <div class="flex items-center space-x-3 border-l border-gray-200 dark:border-slate-700 pl-6">
+                        <!-- Tam Ekran Butonu -->
+                        <button id="fullscreen-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-all duration-300" title="Tam Ekran">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+                        </button>
+
+                        <!-- Karanlık Mod Butonu -->
+                        <button id="dark-mode-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-yellow-400 hover:bg-gray-200 dark:hover:bg-slate-700 transition-all duration-300">
+                            <svg id="sun-icon" class="hidden w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path></svg>
+                            <svg id="moon-icon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                        </button>
+
+                        <a href="#iletisim" class="bg-orange-accent text-white px-5 py-2 rounded-full hover:bg-orange-600 transition shadow-lg shadow-orange-500/20">İletişim</a>
+                    </div>
+                </div>
+
+                <!-- Mobil Kontroller (Hamburger Menüsü hariç olanlar) -->
+                <div class="md:hidden flex items-center space-x-2">
+                    <button id="mobile-dark-mode" class="p-2 text-gray-600 dark:text-yellow-400">
+                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Kahraman (Hero) Bölümü -->
+    <section class="relative h-screen flex items-center justify-center hero-gradient text-white pt-20">
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <div class="inline-block mb-6 px-4 py-1 border border-orange-500/30 rounded-full bg-orange-500/10 backdrop-blur-sm">
+                <span class="text-orange-400 text-sm font-semibold tracking-widest uppercase">Geleneksel Lezzet Durağı</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Güne Sıcak Bir <span class="orange-accent">Dokunuş</span></h1>
+            <p class="text-xl md:text-2xl mb-10 text-gray-200">Taş fırından çıkan taptaze lezzetler A.D.A.Y kalitesiyle her sabah masanızda.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#urunler" class="bg-orange-accent text-white px-8 py-4 rounded-lg font-semibold text-lg hover:scale-105 transition-transform">Ürünlerimizi Keşfet</a>
+                <a href="#hakkimizda" class="bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/30 transition">Hikayemiz</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Özellikler Bölümü -->
+    <section class="py-20 bg-white dark:bg-slate-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="p-6">
+                    <div class="bg-orange-100 dark:bg-orange-900/20 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">Her Gün Taze</h3>
+                    <p class="text-gray-600 dark:text-slate-400">Her sabah saat 05:00'te fırınımızı yakıyor, taptaze ürünler hazırlıyoruz.</p>
+                </div>
+                <div class="p-6">
+                    <div class="bg-gray-100 dark:bg-slate-800 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-gray-700 dark:text-slate-300">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">Doğal Malzemeler</h3>
+                    <p class="text-gray-600 dark:text-slate-400">Hiçbir katkı maddesi kullanmadan, en kaliteli un ve malzemelerle gerçek lezzet.</p>
+                </div>
+                <div class="p-6">
+                    <div class="bg-orange-100 dark:bg-orange-900/20 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-6 text-orange-500">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 dark:text-white">Sevgiyle Pişirildi</h3>
+                    <p class="text-gray-600 dark:text-slate-400">Fırıncılık bizim için nesillerden gelen bir tutku ve sanat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ürünler Bölümü -->
+    <section id="urunler" class="py-20 bg-gray-50 dark:bg-slate-950 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+            <h2 class="text-4xl font-bold mb-12 dark:text-white">Popüler <span class="orange-accent">Ürünlerimiz</span></h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"> 
+                <!-- Ürün Kartı --> 
+                 <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"> 
+                    <div class="h-64 overflow-hidden"> 
+                        <img src="images/ekmeks.jpeg" alt="Ekmek" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"> 
+                    </div> <div class="p-6 text-center"> 
+                        <h4 class="text-lg font-bold mb-2 dark:text-white">Tam Buğday Ekmeği</h4>
+                         <p class="text-gray-500 dark:text-slate-400 text-sm">Taş fırında ağır ağır pişmiş sağlıklı lezzet.</p> 
+                        </div> </div> <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"> 
+                            <div class="h-64 overflow-hidden"> <img src="images/kruvasan.jpeg" alt="Kruvasan" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"> 
+                            </div> <div class="p-6 text-center"> <h4 class="text-lg font-bold mb-2 dark:text-white">Tereyağlı Kruvasan</h4> <p class="text-gray-500 dark:text-slate-400 text-sm">Gerçek tereyağı kokulu Fransız lezzeti.</p> 
+                            </div> </div> <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"> <div class="h-64 overflow-hidden"> <img src="images/kurabiye.jpeg" alt="Kurabiye" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"> 
+                            </div> <div class="p-6 text-center"> <h4 class="text-lg font-bold mb-2 dark:text-white">Çikolatalı Kurabiye</h4> <p class="text-gray-500 dark:text-slate-400 text-sm">Bol çikolata parçacıklı el yapımı lezzet.</p> 
+                            </div> </div> <div class="group bg-white dark:bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition"> 
+                                <div class="h-64 overflow-hidden"> <img src="images/pasta.jpeg" alt="Pasta" class="w-full h-full object-cover group-hover:scale-110 transition duration-500"> </div> <div class="p-6 text-center"> <h4 class="text-lg font-bold mb-2 dark:text-white">Meyveli Pasta</h4> <p class="text-gray-500 dark:text-slate-400 text-sm">Mevsim meyveleriyle süslenmiş taptaze pasta.</p> </div> </div> </div>
+        </div>
+    </section>
+
+    <!-- Hikayemiz Bölümü -->
+    <section id="hakkimizda" class="py-24 bg-dark-grey text-white dark:bg-black transition-colors overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="w-full lg:w-1/2 relative">
+                    <div class="relative z-10 overflow-hidden rounded-2xl shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop" alt="Fırın" class="w-full h-[450px] object-cover block">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-full h-full border-2 border-orange-500 rounded-2xl z-0 pointer-events-none"></div>
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <span class="text-orange-400 font-bold uppercase tracking-widest text-sm border-b-2 border-orange-400 pb-1">A.D.A.Y Hikayesi</span>
+                    <h2 class="text-4xl md:text-5xl font-bold mt-6 mb-8 leading-tight">1985'ten Beri Unun ve <br><span class="orange-accent">Emeğin</span> Serüveni</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-8">
+                        Küçük bir mahalle fırını olarak başladığımız yolculuğumuza, ilk günkü heyecanımızla devam ediyoruz. İsmimizdeki her harf; Adalet, Dürüstlük, Azim ve Yenilikçilik değerlerimizi temsil ediyor.
+                    </p>
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t border-gray-700">
+                        <div>
+                            <span class="block text-4xl font-bold orange-accent uppercase">35+</span>
+                            <span class="text-sm text-gray-400 font-medium">Yıllık Tecrübe</span>
+                        </div>
+                        <div>
+                            <span class="block text-4xl font-bold orange-accent uppercase">20+</span>
+                            <span class="text-sm text-gray-400 font-medium">Ürün Çeşidi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="iletisim" class="bg-white dark:bg-slate-900 py-12 border-t border-gray-100 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div>
+                    <span class="text-3xl font-bold text-gray-900 dark:text-white uppercase">A.D.<span class="orange-accent">A.Y</span></span>
+                    <p class="mt-4 text-gray-500 dark:text-slate-400">Geleneksel lezzeti her gün masanıza taşıyoruz.</p>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6 dark:text-white uppercase tracking-wider">Hızlı Erişim</h5>
+                    <ul class="space-y-3 text-gray-600 dark:text-slate-400">
+                        <li><a href="#" class="hover:text-orange-500 transition">Anasayfa</a></li>
+                        <li><a href="#urunler" class="hover:text-orange-500 transition">Ürünlerimiz</a></li>
+                        <li><a href="#hakkimizda" class="hover:text-orange-500 transition">Hakkımızda</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-6 dark:text-white uppercase tracking-wider">İletişim</h5>
+                    <p class="text-gray-600 dark:text-slate-400 mb-2">Lezzet Sokak No:12, İstanbul</p>
+                    <p class="text-gray-600 dark:text-slate-400">0(212) 555 00 00</p>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-gray-400">© 2026 A.D.A.Y Fırıncılık. Tüm hakları saklıdır.</p>
+                <div class="flex space-x-6 text-gray-400">
+                    <a href="#" class="hover:text-orange-500 transition">Instagram</a>
+                    <a href="#" class="hover:text-orange-500 transition">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Yan Menü (Sidebar) Kontrolleri
+        const openSidebarBtn = document.getElementById('open-sidebar');
+        const closeSidebarBtn = document.getElementById('close-sidebar');
+        const sidebar = document.getElementById('mobile-sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('sidebar-closed');
+            sidebar.classList.toggle('sidebar-open');
+            overlay.classList.toggle('hidden');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        openSidebarBtn?.addEventListener('click', toggleSidebar);
+        closeSidebarBtn?.addEventListener('click', toggleSidebar);
+        overlay?.addEventListener('click', toggleSidebar);
+        
+        // Linklere tıklandığında menüyü kapat
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', toggleSidebar);
+        });
+
+        // Karanlık Mod
+        const toggleBtn = document.getElementById('dark-mode-toggle');
+        const mobileToggleBtn = document.getElementById('mobile-dark-mode');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const html = document.documentElement;
+
+        function updateDarkModeUI(isDark) {
+            if (isDark) {
+                sunIcon?.classList.remove('hidden');
+                moonIcon?.classList.add('hidden');
+            } else {
+                sunIcon?.classList.add('hidden');
+                moonIcon?.classList.remove('hidden');
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+            updateDarkModeUI(true);
+        }
+
+        const handleThemeToggle = () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            updateDarkModeUI(isDark);
+            localStorage.theme = isDark ? 'dark' : 'light';
+        };
+
+        toggleBtn?.addEventListener('click', handleThemeToggle);
+        mobileToggleBtn?.addEventListener('click', handleThemeToggle);
+
+        // Tam Ekran
+        const fsToggle = document.getElementById('fullscreen-toggle');
+        fsToggle?.addEventListener('click', () => {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Tam ekran hatası: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        });
+    </script>
+</body>
+</html>
