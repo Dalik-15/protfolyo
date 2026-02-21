@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A.D.A.Y | Geleneksel Fırın Lezzetleri</title>
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script>
@@ -11,57 +12,6 @@
             darkMode: 'class',
         }
     </script>
-    <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        /* Kahraman Bölümü Arka Planı */
-        .hero-gradient {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-gradient::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 80%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(243, 156, 18, 0.15) 0%, transparent 70%);
-            transform: rotate(-15deg);
-        }
-        .orange-accent { color: #f39c12; }
-        .bg-orange-accent { background-color: #f39c12; }
-        
-        /* Görsel Çerçeve Efekti */
-        .image-frame::after {
-            content: '';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: -20px;
-            bottom: -20px;
-            border: 3px solid #f39c12;
-            border-radius: 1rem;
-            z-index: -1;
-        }
-
-        /* Mobil Menü Animasyonları */
-        #mobile-sidebar {
-            transition: transform 0.3s ease-in-out;
-        }
-        .sidebar-closed {
-            transform: translateX(-100%);
-        }
-        .sidebar-open {
-            transform: translateX(0);
-        }
-    </style>
 </head>
 <body class="bg-gray-50 text-gray-800 transition-colors duration-300 dark:bg-slate-950 dark:text-slate-300">
 
@@ -76,12 +26,7 @@
                 </button>
             </div>
             
-            <nav class="flex flex-col space-y-4 text-lg font-medium">
-                <a href="#" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Anasayfa</a>
-                <a href="#urunler" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Ürünlerimiz</a>
-                <a href="#hakkimizda" class="mobile-nav-link p-3 rounded-xl hover:bg-orange-50 dark:hover:bg-slate-800 hover:text-orange-500 transition">Hikayemiz</a>
-                <a href="#iletisim" class="mobile-nav-link p-3 rounded-xl bg-orange-accent text-white hover:bg-orange-600 transition text-center shadow-lg shadow-orange-500/20">İletişim</a>
-            </nav>
+           
 
             <div class="mt-auto pt-10 border-t border-gray-100 dark:border-slate-800">
                 <p class="text-sm text-gray-400">© 2026 A.D.A.Y Fırıncılık</p>
@@ -106,14 +51,12 @@
                 <div class="hidden md:flex items-center space-x-6">
                     <div class="flex items-baseline space-x-8 text-sm font-medium uppercase tracking-wider">
                         <a href="#" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Anasayfa</a>
-                        <a href="#urunler" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Ürünlerimiz</a>
+                        <a href="urunler.html" target="_blank" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Ürünlerimiz</a>
                         <a href="#hakkimizda" class="hover:text-orange-500 transition dark:text-slate-300 dark:hover:text-orange-400">Hikayemiz</a>
                     </div>
                     
                     <div class="flex items-center space-x-3 border-l border-gray-200 dark:border-slate-700 pl-6">
                         <!-- Tam Ekran Butonu -->
-                        <button id="fullscreen-toggle" class="p-2 rounded-full bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-300 hover:bg-orange-100 dark:hover:bg-orange-900/30 transition-all duration-300" title="Tam Ekran">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
                         </button>
 
                         <!-- Karanlık Mod Butonu -->

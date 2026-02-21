@@ -4,7 +4,7 @@ body {
         /* Kahraman Bölümü Arka Planı */
         .hero-gradient {
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
-                        url(images/eppek.jpeg);
+                        url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -35,4 +35,15 @@ body {
             border: 3px solid #f39c12;
             border-radius: 1rem;
             z-index: -1;
+        }
+
+        /* Mobil Menü Animasyonları */
+        #mobile-sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        .sidebar-open {
+            transform: translateX(0);
         }
